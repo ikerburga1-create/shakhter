@@ -3,28 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ФК Шахтёр — Официальное обращение / Ресми өтініш</title>
+    <title>ФК Шахтёр Караганда — Официальное обращение</title>
     <style>
-        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #121212; color: #fff; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .card { background: #1e1e1e; padding: 35px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); width: 100%; max-width: 520px; border-top: 5px solid #ff6600; position: relative; }
-        
-        .lang-switch { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 20px; }
-        .lang-btn { background: #2a2a2a; border: 1px solid #444; color: #888; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
-        .lang-btn.active { background: #ff6600; color: #fff; border-color: #ff6600; }
+        :root {
+            --orange: #ff6600;
+            --orange-hover: #e65c00;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #ffffff;
+        }
 
-        h2 { text-align: center; color: #ff6600; margin-top: 0; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        
+        body { 
+            background: radial-gradient(circle at center, #2a2a2a 0%, #101010 100%);
+            color: var(--text-color); 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+
+        .card { 
+            background: var(--card-bg); 
+            padding: 35px; 
+            border-radius: 16px; 
+            box-shadow: 0 12px 32px rgba(0,0,0,0.7); 
+            width: 100%; 
+            max-width: 480px; 
+            border-top: 6px solid var(--orange); 
+            position: relative; 
+        }
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .badge-img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .club-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 0;
+        }
+
+        .club-subtitle {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lang-switch { 
+            display: flex; 
+            justify-content: flex-end; 
+            gap: 6px; 
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .lang-btn { 
+            background: #2a2a2a; 
+            border: 1px solid #444; 
+            color: #888; 
+            padding: 5px 10px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 12px; 
+            font-weight: bold; 
+            transition: 0.2s; 
+        }
+
+        .lang-btn.active { 
+            background: var(--orange); 
+            color: #fff; 
+            border-color: var(--orange); 
+        }
+
         .form-group { margin-bottom: 18px; }
-        label { display: block; margin-bottom: 6px; color: #ccc; font-size: 14px; }
-        input { width: 100%; padding: 12px; background: #2a2a2a; border: 1px solid #444; border-radius: 6px; color: #fff; font-size: 15px; outline: none; transition: 0.2s; }
-        input:focus { border-color: #ff6600; }
-        
-        button[type="submit"] { width: 100%; padding: 14px; background: #ff6600; color: #fff; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s; }
-        button[type="submit"]:hover { background: #e65c00; }
-        
-        #resultCard { display: none; margin-top: 25px; padding: 20px; background: #1a271a; border: 1px solid #2e7d32; border-radius: 8px; }
-        #resultCard h3 { color: #4caf50; margin-top: 0; margin-bottom: 12px; }
-        #resultCard p { line-height: 1.6; color: #ddd; margin-bottom: 0; }
+        label { display: block; margin-bottom: 6px; color: #ccc; font-size: 13px; font-weight: 600; }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            background: #2a2a2a; 
+            border: 1px solid #444; 
+            border-radius: 8px; 
+            color: #fff; 
+            font-size: 14px; 
+            outline: none; 
+            transition: 0.3s; 
+        }
+        input:focus { border-color: var(--orange); box-shadow: 0 0 8px rgba(255,102,0,0.3); }
+
+        button[type="submit"] { 
+            width: 100%; 
+            padding: 14px; 
+            background: var(--orange); 
+            color: #fff; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 15px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.2s; 
+        }
+        button[type="submit"]:hover { background: var(--orange-hover); }
+
+        /* Всплывающее окно (Модальный бланк) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .official-document {
+            background: #ffffff;
+            color: #222222;
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            position: relative;
+            border: 8px solid var(--orange);
+            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 16px 16px;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .doc-header {
+            text-align: center;
+            border-bottom: 2px solid var(--orange);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .doc-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111;
+            text-transform: uppercase;
+            margin: 10px 0 0 0;
+        }
+
+        .doc-body {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #333;
+            text-align: justify;
+        }
+
+        .doc-footer {
+            margin-top: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .stamp-zone {
+            width: 90px;
+            height: 90px;
+            border: 2px dashed #cc3300;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cc3300;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            transform: rotate(-12deg);
+            text-transform: uppercase;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
@@ -35,7 +228,15 @@
         <button type="button" class="lang-btn" id="btn-kk" onclick="setLanguage('kk')">ҚАЗ</button>
     </div>
 
-    <h2>ФК «Шахтёр»</h2>
+    <div class="header-logo">
+        <svg class="badge-img" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 0L100 20V60C100 90 50 120 50 120C50 120 0 90 0 60V20L50 0Z" fill="#1E1E1E" stroke="#FF6600" stroke-width="4"/>
+            <path d="M50 10L90 26V58C90 82 50 106 50 106C50 106 10 82 10 58V26L50 10Z" fill="#FF6600"/>
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-size="22" font-weight="900" font-family="Arial">ФКШ</text>
+        </svg>
+        <h1 class="club-title">ФК «Шахтёр»</h1>
+        <div class="club-subtitle">Караганда</div>
+    </div>
 
     <form id="requestForm">
         <div class="form-group">
@@ -52,10 +253,26 @@
         </div>
         <button type="submit" id="btn-submit">Сформировать обращение</button>
     </form>
+</div>
 
-    <div id="resultCard">
-        <h3 id="result-title">Обращение к руководству</h3>
-        <p id="resultText"></p>
+<!-- Модальное окно (Официальный Бланк) -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="official-document">
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+        <div class="doc-header">
+            <div style="font-size: 12px; font-weight: bold; color: #666; letter-spacing: 1px;">ФУТБОЛЬНЫЙ КЛУБ «ШАХТЁР»г. КАРАГАНДА</div>
+            <div class="doc-title" id="docTitle">Официальное уведомление</div>
+        </div>
+        <div class="doc-body" id="docText"></div>
+        <div class="doc-footer">
+            <div>
+                <p style="margin: 0; font-weight: bold; font-size: 13px;">Администрация ФК «Шахтёр»</p>
+                <p style="margin: 3px 0 0 0; font-size: 11px; color: #777;">Печать действительна по месту требования</p>
+            </div>
+            <div class="stamp-zone">
+                ФК Шахтёр<br>Караганда<br>★ 1958 ★
+            </div>
+        </div>
     </div>
 </div>
 
@@ -71,12 +288,12 @@
             companyLabel: "Название компании",
             companyPlaceholder: "ООО Компания",
             submitBtn: "Сформировать обращение",
-            resultTitle: "Обращение к руководству",
+            docTitle: "ОФИЦИАЛЬНОЕ ОБРАЩЕНИЕ",
             getText: (name, position, company) => 
                 `Руководству компании <strong>«${company}»</strong>.<br><br>` +
-                `Футбольный клуб «Шахтёр» направляет просьбу освободить сотрудника <strong>${name}</strong> ` +
+                `Футбольный клуб «Шахтёр» (г. Караганда) официально направляет просьбу освободить сотрудника <strong>${name}</strong> ` +
                 `(должность: ${position}) от выполнения рабочих обязанностей на время проведения решающего матча.<br><br>` +
-                `Данная игра имеет ключевое значение в борьбе за чемпионский титул, и присутствие преданных болельщиков на трибунах крайне важно для поддержки команды!`
+                `Данная игра имеет ключевое значение в борьбе за чемпионский титул, и присутствие преданных болельщиков на трибунах стадиона крайне важно для поддержки команды!`
         },
         kk: {
             nameLabel: "Аты-жөні",
@@ -86,55 +303,45 @@
             companyLabel: "Компания атауы",
             companyPlaceholder: "ЖШС Компания",
             submitBtn: "Өтінішті қалыптастыру",
-            resultTitle: "Басшылыққа өтініш",
+            docTitle: "РЕСМИ ӨТІНІШ",
             getText: (name, position, company) => 
                 `<strong>«${company}»</strong> компаниясының басшылығына.<br><br>` +
-                `«Шахтёр» футбол клубы шешуші матч кезінде қызметкер <strong>${name}</strong>-ні ` +
-                `(лауазымы: ${position}) жұмыс міндеттерін орындаудан босатуды сұрайды.<br><br>` +
-                `Бұл ойын чемпиондық титул үшін күресте шешуші маңызға ие, ал адал жанкүйерлердің трибунада болуы команданы қолдау үшін өте маңызды!`
+                `«Шахтёр» футбол клубы (Қарағанды қ.) шешуші матч кезінде қызметкер <strong>${name}</strong>-ні ` +
+                `(лауазымы: ${position}) жұмыс міндеттерін орындаудан босатуды ресми түрде сұрайды.<br><br>` +
+                `Бұл ойын чемпиондық титул үшін күресте шешуші маңызға ие, ал адал жанкүйерлердің стадион трибунасында болуы команданы қолдау үшін өте маңызды!`
         }
     };
 
     function setLanguage(lang) {
         currentLang = lang;
-
         document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
         document.getElementById('btn-kk').classList.toggle('active', lang === 'kk');
 
         document.getElementById('label-name').innerText = translations[lang].nameLabel;
         document.getElementById('fullName').placeholder = translations[lang].namePlaceholder;
-
         document.getElementById('label-position').innerText = translations[lang].positionLabel;
         document.getElementById('position').placeholder = translations[lang].positionPlaceholder;
-
         document.getElementById('label-company').innerText = translations[lang].companyLabel;
         document.getElementById('company').placeholder = translations[lang].companyPlaceholder;
-
         document.getElementById('btn-submit').innerText = translations[lang].submitBtn;
-        document.getElementById('result-title').innerText = translations[lang].resultTitle;
-
-        const resultCard = document.getElementById('resultCard');
-        if (resultCard.style.display === 'block') {
-            generateResult();
-        }
     }
 
-    function generateResult() {
+    document.getElementById('requestForm').addEventListener('submit', function(e) {
+        e.preventDefault();
         const name = document.getElementById('fullName').value;
         const position = document.getElementById('position').value;
         const company = document.getElementById('company').value;
 
         if (name && position && company) {
-            const resultText = translations[currentLang].getText(name, position, company);
-            document.getElementById('resultText').innerHTML = resultText;
-            document.getElementById('resultCard').style.display = 'block';
+            document.getElementById('docTitle').innerText = translations[currentLang].docTitle;
+            document.getElementById('docText').innerHTML = translations[currentLang].getText(name, position, company);
+            document.getElementById('modalOverlay').style.display = 'flex';
         }
-    }
-
-    document.getElementById('requestForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        generateResult();
     });
+
+    function closeModal() {
+        document.getElementById('modalOverlay').style.display = 'none';
+    }
 </script>
 
 </body>
