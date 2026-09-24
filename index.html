@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ФК Шахтёр — Официальное обращение / Ресми өтініш</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #121212; color: #fff; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .card { background: #1e1e1e; padding: 35px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); width: 100%; max-width: 520px; border-top: 5px solid #ff6600; position: relative; }
+        
+        .lang-switch { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 20px; }
+        .lang-btn { background: #2a2a2a; border: 1px solid #444; color: #888; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .lang-btn.active { background: #ff6600; color: #fff; border-color: #ff6600; }
+
+        h2 { text-align: center; color: #ff6600; margin-top: 0; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; color: #ccc; font-size: 14px; }
+        input { width: 100%; padding: 12px; background: #2a2a2a; border: 1px solid #444; border-radius: 6px; color: #fff; font-size: 15px; outline: none; transition: 0.2s; }
+        input:focus { border-color: #ff6600; }
+        
+        button[type="submit"] { width: 100%; padding: 14px; background: #ff6600; color: #fff; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        button[type="submit"]:hover { background: #e65c00; }
+        
+        #resultCard { display: none; margin-top: 25px; padding: 20px; background: #1a271a; border: 1px solid #2e7d32; border-radius: 8px; }
+        #resultCard h3 { color: #4caf50; margin-top: 0; margin-bottom: 12px; }
+        #resultCard p { line-height: 1.6; color: #ddd; margin-bottom: 0; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="lang-switch">
+        <button type="button" class="lang-btn active" id="btn-ru" onclick="setLanguage('ru')">РУС</button>
+        <button type="button" class="lang-btn" id="btn-kk" onclick="setLanguage('kk')">ҚАЗ</button>
+    </div>
+
+    <h2>ФК «Шахтёр»</h2>
+
+    <form id="requestForm">
+        <div class="form-group">
+            <label id="label-name" for="fullName">Имя и Фамилия</label>
+            <input type="text" id="fullName" placeholder="Иван Иванов" required>
+        </div>
+        <div class="form-group">
+            <label id="label-position" for="position">Занимаемая должность</label>
+            <input type="text" id="position" placeholder="Менеджер / Инженер" required>
+        </div>
+        <div class="form-group">
+            <label id="label-company" for="company">Название компании</label>
+            <input type="text" id="company" placeholder="ООО Компания" required>
+        </div>
+        <button type="submit" id="btn-submit">Сформировать обращение</button>
+    </form>
+
+    <div id="resultCard">
+        <h3 id="result-title">Обращение к руководству</h3>
+        <p id="resultText"></p>
+    </div>
+</div>
+
+<script>
+    let currentLang = 'ru';
+
+    const translations = {
+        ru: {
+            nameLabel: "Имя и Фамилия",
+            namePlaceholder: "Иван Иванов",
+            positionLabel: "Занимаемая должность",
+            positionPlaceholder: "Менеджер / Инженер",
+            companyLabel: "Название компании",
+            companyPlaceholder: "ООО Компания",
+            submitBtn: "Сформировать обращение",
+            resultTitle: "Обращение к руководству",
+            getText: (name, position, company) => 
+                `Руководству компании <strong>«${company}»</strong>.<br><br>` +
+                `Футбольный клуб «Шахтёр» направляет просьбу освободить сотрудника <strong>${name}</strong> ` +
+                `(должность: ${position}) от выполнения рабочих обязанностей на время проведения решающего матча.<br><br>` +
+                `Данная игра имеет ключевое значение в борьбе за чемпионский титул, и присутствие преданных болельщиков на трибунах крайне важно для поддержки команды!`
+        },
+        kk: {
+            nameLabel: "Аты-жөні",
+            namePlaceholder: "Асқар Ахметов",
+            positionLabel: "Атқаратын лауазымы",
+            positionPlaceholder: "Менеджер / Инженер",
+            companyLabel: "Компания атауы",
+            companyPlaceholder: "ЖШС Компания",
+            submitBtn: "Өтінішті қалыптастыру",
+            resultTitle: "Басшылыққа өтініш",
+            getText: (name, position, company) => 
+                `<strong>«${company}»</strong> компаниясының басшылығына.<br><br>` +
+                `«Шахтёр» футбол клубы шешуші матч кезінде қызметкер <strong>${name}</strong>-ні ` +
+                `(лауазымы: ${position}) жұмыс міндеттерін орындаудан босатуды сұрайды.<br><br>` +
+                `Бұл ойын чемпиондық титул үшін күресте шешуші маңызға ие, ал адал жанкүйерлердің трибунада болуы команданы қолдау үшін өте маңызды!`
+        }
+    };
+
+    function setLanguage(lang) {
+        currentLang = lang;
+
+        document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+        document.getElementById('btn-kk').classList.toggle('active', lang === 'kk');
+
+        document.getElementById('label-name').innerText = translations[lang].nameLabel;
+        document.getElementById('fullName').placeholder = translations[lang].namePlaceholder;
+
+        document.getElementById('label-position').innerText = translations[lang].positionLabel;
+        document.getElementById('position').placeholder = translations[lang].positionPlaceholder;
+
+        document.getElementById('label-company').innerText = translations[lang].companyLabel;
+        document.getElementById('company').placeholder = translations[lang].companyPlaceholder;
+
+        document.getElementById('btn-submit').innerText = translations[lang].submitBtn;
+        document.getElementById('result-title').innerText = translations[lang].resultTitle;
+
+        const resultCard = document.getElementById('resultCard');
+        if (resultCard.style.display === 'block') {
+            generateResult();
+        }
+    }
+
+    function generateResult() {
+        const name = document.getElementById('fullName').value;
+        const position = document.getElementById('position').value;
+        const company = document.getElementById('company').value;
+
+        if (name && position && company) {
+            const resultText = translations[currentLang].getText(name, position, company);
+            document.getElementById('resultText').innerHTML = resultText;
+            document.getElementById('resultCard').style.display = 'block';
+        }
+    }
+
+    document.getElementById('requestForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        generateResult();
+    });
+</script>
+
+</body>
+</html>
